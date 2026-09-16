@@ -16,8 +16,8 @@ Existing tab managers dump everything into one flat list. Tab Triage answers
 the actual question a hoarder has: **which of these tabs can I close right
 now without losing anything?**
 
-- **Clusters** tabs by domain + title similarity — "12 GitHub tabs" becomes
-  "repo X issues" vs. "repo Y pull requests."
+- **Clusters** tabs by registrable domain — every GitHub tab lands in one
+  "github.com" card, every Google Docs/Mail tab in one "google.com" card.
 - **Scores staleness** per tab (idle time, never-activated penalty) and per
   cluster — pinned and audio-playing tabs are never flagged.
 - **Flags duplicates** — the exact same page open multiple times — as their
@@ -47,8 +47,8 @@ at `dist/`).
 
 ## Architecture
 
-- `src/lib/cluster.ts` — pure clustering function: domain grouping + Jaccard
-  title-token similarity. No `chrome.*` calls, fully unit-tested.
+- `src/lib/cluster.ts` — pure clustering function: groups tabs by
+  registrable domain. No `chrome.*` calls, fully unit-tested.
 - `src/lib/staleness.ts` — pure staleness scoring. Pinned/audible tabs are
   hard-excluded, not just down-weighted.
 - `src/lib/duplicates.ts` — URL-normalization based duplicate detection.
@@ -74,9 +74,9 @@ at `dist/`).
 ## Known maintenance burden
 
 Much lower than a page-scraping extension — `chrome.tabs` is a stable API,
-not someone else's DOM. The real ongoing work is tuning clustering quality
-(the title-similarity threshold) against real-world tab hoards, which is a
-UX judgment call, not a bug fix.
+not someone else's DOM. Domain-only clustering is intentionally simple and
+should stay low-maintenance; further grouping within a busy domain is left
+to the expand/collapse tab list rather than automatic sub-clustering.
 
 ## License
 

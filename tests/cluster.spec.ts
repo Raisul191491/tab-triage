@@ -23,24 +23,15 @@ describe('registrableDomain', () => {
 })
 
 describe('buildClusters', () => {
-  it('groups tabs on the same domain with similar titles', () => {
-    const clusters = buildClusters([
-      tab(1, 'https://github.com/a/repo/issues/1', 'Bug: crash on load - repo'),
-      tab(2, 'https://github.com/a/repo/issues/2', 'Bug: crash on save - repo'),
-    ])
-    expect(clusters).toHaveLength(1)
-    expect(clusters[0]!.tabIds.sort()).toEqual([1, 2])
-  })
-
-  it('splits a domain into separate clusters when titles diverge', () => {
+  it('groups all tabs on the same domain into one cluster, regardless of title', () => {
     const clusters = buildClusters([
       tab(1, 'https://github.com/a/repo/issues/1', 'Bug tracker triage workflow'),
-      tab(2, 'https://github.com/a/repo/issues/1', 'Bug tracker triage workflow'),
-      tab(3, 'https://github.com/b/other/pulls/9', 'Unrelated pull request review'),
+      tab(2, 'https://github.com/a/repo/pulls/9', 'Unrelated pull request review'),
+      tab(3, 'https://github.com/b/other/wiki', 'Completely different topic'),
     ])
-    const withMultiple = clusters.filter((c) => c.tabIds.length > 1)
-    expect(withMultiple).toHaveLength(1)
-    expect(clusters.some((c) => c.tabIds.includes(3))).toBe(true)
+    expect(clusters).toHaveLength(1)
+    expect(clusters[0]!.tabIds.sort()).toEqual([1, 2, 3])
+    expect(clusters[0]!.label).toBe('github.com')
   })
 
   it('keeps different domains in separate clusters', () => {
@@ -49,6 +40,15 @@ describe('buildClusters', () => {
       tab(2, 'https://b.com', 'Same title'),
     ])
     expect(clusters).toHaveLength(2)
+  })
+
+  it('groups subdomains under their registrable domain', () => {
+    const clusters = buildClusters([
+      tab(1, 'https://docs.google.com/document/1', 'Doc'),
+      tab(2, 'https://mail.google.com/mail/u/0', 'Inbox'),
+    ])
+    expect(clusters).toHaveLength(1)
+    expect(clusters[0]!.tabIds.sort()).toEqual([1, 2])
   })
 
   it('sorts clusters stalest-first', () => {
