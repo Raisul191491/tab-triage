@@ -85,7 +85,10 @@ export function useTriage() {
       .filter((t): t is TriageTab => t !== undefined)
     if (closing.length === 0) return
 
-    await chrome.tabs.remove(tabIds)
+    // chrome.tabs.remove's schema validator rejects a Vue reactive Proxy
+    // array (cluster.tabIds comes from a ref-wrapped object) even though its
+    // contents are plain numbers — pass a genuine plain array instead.
+    await chrome.tabs.remove([...tabIds])
     closedThisSession.value += closing.length
     pendingUndo.value = {
       id: `undo:${Date.now()}`,
