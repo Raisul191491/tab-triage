@@ -16,10 +16,11 @@ mode → Load unpacked).
 
 ## Tuning clustering
 
-The title-similarity threshold and domain-grouping logic live in
-`src/lib/cluster.ts`. Since clustering quality is a UX judgment call rather
-than a correctness bug, dogfood any threshold change against your own real
-open tabs before committing to it, in addition to the unit tests.
+Domain-grouping logic lives in `src/lib/cluster.ts`. Clustering is
+intentionally domain-only (no title-based sub-splitting) — if you're
+tempted to add finer-grained grouping, dogfood it against your own real
+open tabs first, since clustering quality is a UX judgment call rather than
+something the unit tests alone can validate.
 
 ## Branches & commits
 
