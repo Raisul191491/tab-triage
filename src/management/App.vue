@@ -81,6 +81,7 @@ const visibleDuplicates = computed(() =>
           :group="group"
           :tabs="tabsForCluster(group)"
           @close-extra="closeDuplicateGroup"
+          @close-tab="(id) => closeTabs([id])"
         />
       </div>
 

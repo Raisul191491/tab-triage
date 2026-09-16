@@ -11,10 +11,19 @@ const LABEL_COLOR: Record<string, string> = {
   stale: 'text-accent',
   'very-stale': 'text-accent',
 }
+
+/** Jump to this tab: focus its window, then activate it within that window. */
+async function activate(): Promise<void> {
+  await chrome.windows.update(props.tab.windowId, { focused: true })
+  await chrome.tabs.update(props.tab.id, { active: true })
+}
 </script>
 
 <template>
-  <div class="flex items-center gap-2 py-1.5 pl-8 pr-2 text-[12px]">
+  <div
+    class="flex cursor-pointer items-center gap-2 py-1.5 pl-8 pr-2 text-[12px] transition-colors hover:bg-white/5"
+    @click="activate"
+  >
     <img
       v-if="tab.favIconUrl"
       :src="tab.favIconUrl"
@@ -29,8 +38,8 @@ const LABEL_COLOR: Record<string, string> = {
       >{{ stalenessLabel(tab.stalenessScore).replace('-', ' ') }}</span
     >
     <button
-      class="shrink-0 rounded px-1.5 py-0.5 text-[11px] text-popup-faint transition-colors hover:bg-white/5 hover:text-popup-text"
-      @click="emit('close', props.tab.id)"
+      class="shrink-0 rounded px-1.5 py-0.5 text-[11px] text-popup-faint transition-colors hover:bg-white/10 hover:text-popup-text"
+      @click.stop="emit('close', props.tab.id)"
     >
       Close
     </button>
