@@ -1,0 +1,8 @@
+<!-- 48px: strokes bumped so the two back cards stay distinct after downscale. -->
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="4" width="120" height="120" rx="27" fill="#141414"/>
+  <rect x="34" y="30" width="60" height="42" rx="8" fill="none" stroke="#AFA9EC" stroke-width="4" opacity="0.3"/>
+  <rect x="26" y="44" width="60" height="42" rx="8" fill="none" stroke="#AFA9EC" stroke-width="4.5" opacity="0.65"/>
+  <rect x="18" y="58" width="60" height="42" rx="8" fill="#AFA9EC"/>
+  <circle cx="30" cy="70" r="4" fill="#141414"/>
+</svg>

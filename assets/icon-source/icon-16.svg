@@ -1,0 +1,7 @@
+<!-- 16px: single solid card, deliberately simplified — the stacking detail
+     cannot survive at this size, but the rounded-card shape still reads. -->
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="4" width="120" height="120" rx="27" fill="#141414"/>
+  <rect x="24" y="46" width="68" height="48" rx="10" fill="#AFA9EC"/>
+  <circle cx="38" cy="61" r="5.5" fill="#141414"/>
+</svg>

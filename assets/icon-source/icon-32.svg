@@ -1,0 +1,7 @@
+<!-- 32px: drop to two cards — three cards would blend together at this size. -->
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="4" width="120" height="120" rx="27" fill="#141414"/>
+  <rect x="28" y="40" width="64" height="46" rx="9" fill="none" stroke="#AFA9EC" stroke-width="6" opacity="0.5"/>
+  <rect x="18" y="56" width="64" height="46" rx="9" fill="#AFA9EC"/>
+  <circle cx="31" cy="69" r="4.5" fill="#141414"/>
+</svg>

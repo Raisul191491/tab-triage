@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-popup-bg: #141414;
+  --color-popup-surface: #1b1b1b;
+  --color-popup-border: rgba(255, 255, 255, 0.08);
+  --color-popup-text: #ededea;
+  --color-popup-muted: #8a8a86;
+  --color-popup-faint: #6b6b67;
+  --color-accent: #afa9ec;
+  --color-accent-soft: rgba(175, 169, 236, 0.14);
+  --color-accent-dim: #7f77dd;
+  --radius-popup: 14px;
+}
